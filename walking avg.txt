@@ -1,0 +1,15 @@
+
+	setBatchMode(true);
+	run("Duplicate...", "title=outstack duplicate");minus=getTitle();
+	run("Set Slice...", "slice="+nSlices);run("Delete Slice");run("Delete Slice");
+	selectWindow(instack);
+	run("Duplicate...", "title=plus duplicate");plus=getTitle();
+	run("Set Slice...", "slice=1");run("Delete Slice");run("Delete Slice");
+	run("Image Calculator...", "image1="+minus+" operation=Average image2="+plus+" stack");
+	selectWindow(instack);
+	run("Set Slice...", "slice=1");run("Delete Slice");
+	run("Set Slice...", "slice="+nSlices);run("Delete Slice");
+	run("Image Calculator...", "image1="+minus+" operation=Average image2="+instack+" stack");
+	selectWindow(plus);run("Close");
+	setBatchMode(false);
+	run("Rename...", "title="+instack+"_wa");
